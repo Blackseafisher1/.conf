@@ -1,5 +1,3 @@
-<?xml version="1.0"?>
-
 <!--
   This file contains all supported Labwc v0.20.0 config elements & attributes with mostly
   default values. Some LXQt specific settings have been added. You may have a
@@ -9,7 +7,6 @@
   Values for [yes|no] can be replaced by [true|false], [on|off] or [1|0].
 
 -->
-
 <labwc_config>
   <core>
     <decoration>server</decoration>
@@ -26,16 +23,18 @@
       <promptCommand></promptCommand>
     -->
   </core>
-
   <placement>
     <policy>cascade</policy>
     <!--
       When <placement><policy> is "cascade", the offset for cascading new
       windows can be overwritten like this:
-      <cascadeOffset x="40" y="30" />
+      <cascadeOffset x="40" y="30"     />
     -->
   </placement>
-
+  <resize>
+    <adjustTiledNeighbors>true</adjustTiledNeighbors>
+    <cornerRange>16</cornerRange>
+  </resize>
   <!-- <font><theme> can be defined without an attribute to set all places -->
   <theme>
     <name>Vent-dark</name>
@@ -81,7 +80,6 @@
       <weight>normal</weight>
     </font>
   </theme>
-
   <windowSwitcher preview="yes" outlines="yes" unshade="yes">
     <osd show="yes" style="classic" output="all" thumbnailLabelFormat="%T" />
     <fields>
@@ -93,25 +91,24 @@
         'trimmed_identifier' to show the app_id for native wayland clients or
         WM_CLASS for XWayland clients.
 
-        <field content="trimmed_identifier" width="65%" />
+        <field content="trimmed_identifier" width="65%"     />
       -->
     </fields>
   </windowSwitcher>
-
   <!--
     Many other kinds of content are supported in the window switcher like below.
     Some contents are fixed-length and others are variable-length.
     See "man 5 labwc-config" for details.
 
     <windowSwitcher preview="no" outlines="no">
-      <osd show="yes" />
+      <osd show="yes"     />
       <fields>
-        <field content="workspace" width="5%" />
-        <field content="state" width="3%" />
-        <field content="type_short" width="3%" />
-        <field content="output" width="9%" />
-        <field content="identifier" width="30%" />
-        <field content="title" width="50%" />
+        <field content="workspace" width="5%"     />
+        <field content="state" width="3%"     />
+        <field content="type_short" width="3%"     />
+        <field content="output" width="9%"     />
+        <field content="identifier" width="30%"     />
+        <field content="title" width="50%"     />
       </fields>
     </windowSwitcher>
 
@@ -125,13 +122,12 @@
     It uses 100% of OSD window width.
 
     <windowSwitcher preview="no" outlines="no">
-      <osd show="yes" />
+      <osd show="yes"     />
       <fields>
-        <field content="custom" format="foobar %b %3s %-10o %-20W %-10i %t" width="100%" />
+        <field content="custom" format="foobar %b %3s %-10o %-20W %-10i %t" width="100%"     />
       </fields>
     </windowSwitcher>
   -->
-
   <!-- edge strength is in pixels -->
   <resistance>
     <screenEdgeStrength>20</screenEdgeStrength>
@@ -141,15 +137,13 @@
     <!-- resistance for vertically/horizontally maximized windows -->
     <unMaximizeThreshold>150</unMaximizeThreshold>
   </resistance>
-
   <resize>
     <!-- Show a simple resize and move indicator -->
-    <popupShow>Never</popupShow>
+    <popupShow>always</popupShow>
     <!-- Let client redraw its contents while resizing -->
-    <drawContents>yes</drawContents>
+    <drawContents>no</drawContents>
     <!-- Borders are effectively 8 pixels wide regardless of visual appearance -->
-    <minimumArea>8</minimumArea>
-
+    <minimumArea>10</minimumArea>
     <!--
       Set cornerRange to a positive value to increase the size of corner
       regions for mouse actions and diagonal window resizing. When omitted,
@@ -158,7 +152,6 @@
       <cornerRange>8</cornerRange>
     -->
   </resize>
-
   <focus>
     <followMouse>no</followMouse>
     <followMouseRequiresMovement>yes</followMouseRequiresMovement>
@@ -166,28 +159,24 @@
     <!-- Delay (ms) before applying raise-on-focus. 0 = immediate. -->
     <raiseOnFocusDelay>0</raiseOnFocusDelay>
   </focus>
-
   <snapping>
     <!-- Set inner and outer range to 0 to disable window snapping completely -->
     <range inner="10" outer="10" />
     <cornerRange>50</cornerRange>
     <overlay enabled="yes">
+      <alwaysOnTop>true</alwaysOnTop>
       <delay inner="500" outer="500" />
     </overlay>
     <topMaximize>yes</topMaximize>
     <notifyClient>always</notifyClient>
   </snapping>
-
-<desktops number="4" popupTime="1000" prefix="Desktop" /> 
-
-  
+  <desktops number="4" popupTime="1000" prefix="Desktop" />
   <desktops>
     <popupTime>1000</popupTime>
     <names>
       <name>Default</name>
     </names>
   </desktops>
-
   <!--
     <margin> can be used to reserve space where new/maximized/tiled
     windows will not be placed. Clients using layer-shell protocol reserve
@@ -196,24 +185,22 @@
 
     If 'output' is not provided, the margin will be applied to all outputs.
 
-    <margin top="10" bottom="10" left="10" right="10" output="HDMI-A-1" />
+    <margin top="10" bottom="10" left="10" right="10" output="HDMI-A-1"     />
   -->
-
   <!-- Percent based regions based on output usable area, % char is required -->
   <!--
     <regions>
-      <region name="top-left"     x="0%"  y="0%"  height="50%"  width="50%"  />
-      <region name="top"          x="0%"  y="0%"  height="50%"  width="100%" />
-      <region name="top-right"    x="50%" y="0%"  height="50%"  width="50%"  />
-      <region name="left"         x="0%"  y="0%"  height="100%" width="50%"  />
-      <region name="center"       x="10%" y="10%" height="80%"  width="80%"  />
-      <region name="right"        x="50%" y="0%"  height="100%" width="50%"  />
-      <region name="bottom-left"  x="0%"  y="50%" height="50%"  width="50%"  />
-      <region name="bottom"       x="0%"  y="50%" height="50%"  width="100%" />
-      <region name="bottom-right" x="50%" y="50%" height="50%"  width="50%"  />
+      <region name="top-left"     x="0%"  y="0%"  height="50%"  width="50%"      />
+      <region name="top"          x="0%"  y="0%"  height="50%"  width="100%"     />
+      <region name="top-right"    x="50%" y="0%"  height="50%"  width="50%"      />
+      <region name="left"         x="0%"  y="0%"  height="100%" width="50%"      />
+      <region name="center"       x="10%" y="10%" height="80%"  width="80%"      />
+      <region name="right"        x="50%" y="0%"  height="100%" width="50%"      />
+      <region name="bottom-left"  x="0%"  y="50%" height="50%"  width="50%"      />
+      <region name="bottom"       x="0%"  y="50%" height="50%"  width="100%"     />
+      <region name="bottom-right" x="50%" y="50%" height="50%"  width="50%"      />
     </regions>
   -->
-
   <!--
     Keybind actions are specified in labwc-actions(5)
     The following keybind modifiers are supported:
@@ -222,240 +209,29 @@
       C - ctrl
       S - shift
 
-    Use <keyboard><default /> to load all the default keybinds (those listed
+    Use <keyboard><default     /> to load all the default keybinds (those listed
     below). If the default keybinds are largely what you want, a sensible
-    approach could be to start the <keyboard> section with a <default />
+    approach could be to start the <keyboard> section with a <default     />
     element, and then (re-)define any special binds you need such as launching
     your favourite terminal or application launcher. See rc.xml for an example.
   -->
- 
-  <keyboard>
-  <!-- Standard-Kürzel von Labwc NICHT laden, wir definieren alles selbst -->
-  <!-- <default /> ist AUSKOMMENTIERT, damit wir volle Kontrolle haben -->
-
-  <!-- ============================================ -->
-  <!-- DEINE NEUEN KÜRZEL (genau wie gewünscht)    -->
-  <!-- ============================================ -->
-
- <!-- SUPER-TASTE (Startmenü / Fancy-Menü öffnen) -->
-<keybind key="Super_L" onRelease="true">
-  <action name="Execute" command="lxqt-qdbus openmenu" />
-</keybind>
-
- 
-  <!-- SUPER + SPACE (LXQt Runner öffnen) -->
-<keybind key="W-space">
-  <action name="Execute" command="lxqt-runner" />
-</keybind>
-
-  
- 
-  <!-- DESKTOP WECHSELN (Strg + 1..0) -->
-  <keybind key="C-1"><action name="GoToDesktop" to="1"/></keybind>
-  <keybind key="C-2"><action name="GoToDesktop" to="2"/></keybind>
-  <keybind key="C-3"><action name="GoToDesktop" to="3"/></keybind>
-  <keybind key="C-4"><action name="GoToDesktop" to="4"/></keybind>
-  <keybind key="C-5"><action name="GoToDesktop" to="5"/></keybind>
-  <keybind key="C-6"><action name="GoToDesktop" to="6"/></keybind>
-  <keybind key="C-7"><action name="GoToDesktop" to="7"/></keybind>
-  <keybind key="C-8"><action name="GoToDesktop" to="8"/></keybind>
-  <keybind key="C-9"><action name="GoToDesktop" to="9"/></keybind>
-  <keybind key="C-0"><action name="GoToDesktop" to="10"/></keybind>
-
-  <!-- DESKTOP WECHSELN (Strg + Alt + Links/Rechts) -->
-  <keybind key="C-A-Left"><action name="GoToDesktop" to="left" wrap="yes"/></keybind>
-  <keybind key="C-A-Right"><action name="GoToDesktop" to="right" wrap="yes"/></keybind>
-    <!-- DESKTOP WECHSELN (Strg + Super + Links/Rechts) -->
-  <keybind key="C-W-Left">
-    <action name="GoToDesktop" to="left" wrap="yes" />
-  </keybind>
-  <keybind key="C-W-Right">
-    <action name="GoToDesktop" to="right" wrap="yes" />
-  </keybind>
-
-  <!-- FENSTER ZU ANDEREM DESKTOP SCHICKEN (Super + Shift + 1..0) -->
-  <keybind key="W-S-1"><action name="SendToDesktop" to="1" follow="false"/></keybind>
-  <keybind key="W-S-2"><action name="SendToDesktop" to="2" follow="false"/></keybind>
-  <keybind key="W-S-3"><action name="SendToDesktop" to="3" follow="false"/></keybind>
-  <keybind key="W-S-4"><action name="SendToDesktop" to="4" follow="false"/></keybind>
-  <keybind key="W-S-5"><action name="SendToDesktop" to="5" follow="false"/></keybind>
-  <keybind key="W-S-6"><action name="SendToDesktop" to="6" follow="false"/></keybind>
-  <keybind key="W-S-7"><action name="SendToDesktop" to="7" follow="false"/></keybind>
-  <keybind key="W-S-8"><action name="SendToDesktop" to="8" follow="false"/></keybind>
-  <keybind key="W-S-9"><action name="SendToDesktop" to="9" follow="false"/></keybind>
-  <keybind key="W-S-0"><action name="SendToDesktop" to="10" follow="false"/></keybind>
-
-  <!-- Fenster zum linken/rechten Desktop verschieben -->
-<keybind key="W-S-Left">
-  <action name="SendToDesktop" to="left" follow="false" wrap="yes" />
-</keybind>
-<keybind key="W-S-Right">
-  <action name="SendToDesktop" to="right" follow="false" wrap="yes" />
-</keybind>
-
-<keybind key="W-A-Right">
-  <action name="GrowToEdge" direction="right"/>
-</keybind>
-
-<keybind key="W-A-Left">
-  <action name="GrowToEdge" direction="left"/>
-</keybind>
-
-
-  
-  <!-- ============================================ -->
-  <!-- LXQt-STANDARDKÜRZEL (alle behalten)          -->
-  <!-- ============================================ -->
-
-  <!-- Konfiguration neu laden -->
-  <keybind key="C-S-r">
-    <action name="Reconfigure"/>
-  </keybind>
-
-  <!-- Dateimanager -->
-  <keybind key="W-p">
-    <action name="Execute" command="pcmanfm-qt" />
-  </keybind>
-
-  
-  <!-- Wordprocessor -->
-  <keybind key="W-w">
-    <action name="Execute" command="lxqt-qdbus run abiword" />
-  </keybind>
-  
-  <!-- Terminal -->
-  <keybind key="W-Return">
-    <action name="Execute" command="lxqt-qdbus run konsole"/>
-  </keybind>
-
-  <!-- Editor -->
-  <keybind key="W-f">
-    <action name="Execute" command="lxqt-qdbus run featherpad"/>
-  </keybind>
-
-  <!-- Ausführen-Dialog -->
-  <keybind key="A-F2">
-    <action name="Execute" command="lxqt-runner" />
-  </keybind>
-
-  <!-- Screenshot -->
-  <keybind key="Print">
-    <action name="Execute" command="lxqt-qdbus run screengrab" />
-  </keybind>
-
-  <!-- Bildschirm sperren -->
-  <keybind key="W-l">
-    <action name="Execute" command="lxqt-leave --lockscreen" />
-  </keybind>
-
-  <!-- QTerminal Dropdown -->
-  <keybind key="F12">
-    <action name="Execute" command="qterminal -d" />
-  </keybind>
-
-  <!-- Power-Buttons -->
-  <keybind key="XF86PowerOff">
-    <action name="Execute" command="lxqt-leave" />
-  </keybind>
-  <keybind key="XF86Suspend">
-    <action name="Execute" command="lxqt-leave --suspend" />
-  </keybind>
-  <keybind key="XF86Sleep">
-    <action name="Execute" command="lxqt-leave --hibernate" />
-  </keybind>
-
-  <!-- Desktop anzeigen/verstecken -->
-  <keybind key="W-D">
-    <action name="Execute" command="lxqt-qdbus showdesktop" />
-  </keybind>
-
-  <!-- Startmenü (LXQt-Menü) -->
-  <keybind key="A-F1">
-    <action name="Execute" command="lxqt-qdbus openmenu" />
-  </keybind>
-
-  <!-- Fenster wechseln -->
-  <keybind key="A-Tab">
-    <action name="NextWindow" />
-  </keybind>
-  <keybind key="A-S-Tab">
-    <action name="PreviousWindow" />
-  </keybind>
-
-  <!-- Fenster schließen -->
-  <keybind key="A-F4">
-    <action name="Close" />
-  </keybind>
-
-  <!-- Fenster maximieren -->
-  <keybind key="W-a">
-    <action name="ToggleMaximize" />
-  </keybind>
-
-  <!-- Fenster an Kanten andocken (Snap) -->
-  <keybind key="W-Left">
-    <action name="SnapToEdge" direction="left" combine="yes" />
-  </keybind>
-  <keybind key="W-Right">
-    <action name="SnapToEdge" direction="right" combine="yes" />
-  </keybind>
-  <keybind key="W-Up">
-    <action name="SnapToEdge" direction="up" combine="yes" />
-  </keybind>
-  <keybind key="W-Down">
-    <action name="SnapToEdge" direction="down" combine="yes" />
-  </keybind>
-
-  <!-- Fenster-Menü -->
-  <keybind key="A-Space">
-    <action name="ShowMenu" menu="client-menu" atCursor="no" />
-  </keybind>
-
-  <!-- LAUTSTÄRKE (LXQt-Befehle) -->
-  <keybind key="XF86_AudioLowerVolume">
-    <action name="Execute" command="lxqt-qdbus volume down" />
-  </keybind>
-  <keybind key="XF86_AudioRaiseVolume">
-    <action name="Execute" command="lxqt-qdbus volume up" />
-  </keybind>
-  <keybind key="XF86_AudioMute">
-    <action name="Execute" command="lxqt-qdbus volume mute" />
-  </keybind>
-
-  <!-- HELLIGKEIT (LXQt-Befehle) -->
-  <keybind key="XF86_MonBrightnessUp">
-    <action name="Execute" command="lxqt-config-brightness -i" />
-  </keybind>
-  <keybind key="XF86_MonBrightnessDown">
-    <action name="Execute" command="lxqt-config-brightness -d" />
-  </keybind>
-  
-  <!-- HELLIGKEIT mit brightnessctl -->
-<keybind key="XF86_MonBrightnessUp">
-  <action name="Execute" command="brightnessctl -e set 5%+" />
-</keybind>
-<keybind key="XF86_MonBrightnessDown">
-  <action name="Execute" command="brightnessctl -e set 5%-" />
-</keybind>#
+  <keyboard><!-- Standard-Kürzel von Labwc NICHT laden, wir definieren alles selbst --><!-- <default     /> ist AUSKOMMENTIERT, damit wir volle Kontrolle haben --><!-- ============================================ --><!-- DEINE NEUEN KÜRZEL (genau wie gewünscht)    --><!-- ============================================ --><!-- SUPER-TASTE (Startmenü / Fancy-Menü öffnen) --><keybind key="Super_L" onRelease="true"><action name="Execute" command="lxqt-qdbus openmenu" /></keybind><!-- SUPER + SPACE (LXQt Runner öffnen) --><keybind key="W-space"><action name="Execute" command="lxqt-runner" /></keybind><!-- DESKTOP WECHSELN (Strg + 1..0) --><keybind key="C-1"><action name="GoToDesktop" to="1" /></keybind><keybind key="C-2"><action name="GoToDesktop" to="2" /></keybind><keybind key="C-3"><action name="GoToDesktop" to="3" /></keybind><keybind key="C-4"><action name="GoToDesktop" to="4" /></keybind><keybind key="C-5"><action name="GoToDesktop" to="5" /></keybind><keybind key="C-6"><action name="GoToDesktop" to="6" /></keybind><keybind key="C-7"><action name="GoToDesktop" to="7" /></keybind><keybind key="C-8"><action name="GoToDesktop" to="8" /></keybind><keybind key="C-9"><action name="GoToDesktop" to="9" /></keybind><keybind key="C-0"><action name="GoToDesktop" to="10" /></keybind><!-- DESKTOP WECHSELN (Strg + Alt + Links/Rechts) --><keybind key="C-A-Left"><action name="GoToDesktop" to="left" wrap="yes" /></keybind><keybind key="C-A-Right"><action name="GoToDesktop" to="right" wrap="yes" /></keybind><!-- DESKTOP WECHSELN (Strg + Super + Links/Rechts) --><keybind key="C-W-Left"><action name="GoToDesktop" to="left" wrap="yes" /></keybind><keybind key="C-W-Right"><action name="GoToDesktop" to="right" wrap="yes" /></keybind><!-- FENSTER ZU ANDEREM DESKTOP SCHICKEN (Super + Shift + 1..0) --><keybind key="W-S-1"><action name="SendToDesktop" to="1" follow="false" /></keybind><keybind key="W-S-2"><action name="SendToDesktop" to="2" follow="false" /></keybind><keybind key="W-S-3"><action name="SendToDesktop" to="3" follow="false" /></keybind><keybind key="W-S-4"><action name="SendToDesktop" to="4" follow="false" /></keybind><keybind key="W-S-5"><action name="SendToDesktop" to="5" follow="false" /></keybind><keybind key="W-S-6"><action name="SendToDesktop" to="6" follow="false" /></keybind><keybind key="W-S-7"><action name="SendToDesktop" to="7" follow="false" /></keybind><keybind key="W-S-8"><action name="SendToDesktop" to="8" follow="false" /></keybind><keybind key="W-S-9"><action name="SendToDesktop" to="9" follow="false" /></keybind><keybind key="W-S-0"><action name="SendToDesktop" to="10" follow="false" /></keybind><!-- Fenster zum linken/rechten Desktop verschieben --><keybind key="W-S-Left"><action name="SendToDesktop" to="left" follow="false" wrap="yes" /></keybind><keybind key="W-S-Right"><action name="SendToDesktop" to="right" follow="false" wrap="yes" /></keybind><keybind key="W-A-Right"><action name="GrowToEdge" direction="right" /></keybind><keybind key="W-A-Left"><action name="GrowToEdge" direction="left" /></keybind><!-- ============================================ --><!-- LXQt-STANDARDKÜRZEL (alle behalten)          --><!-- ============================================ --><!-- Konfiguration neu laden --><keybind key="C-S-r"><action name="Reconfigure" /></keybind><!-- Dateimanager --><keybind key="W-p"><action name="Execute" command="pcmanfm-qt" /></keybind><!-- Wordprocessor --><keybind key="W-w"><action name="Execute" command="lxqt-qdbus run abiword" /></keybind><!-- Terminal --><keybind key="W-Return"><action name="Execute" command="lxqt-qdbus run konsole" /></keybind><!-- Editor --><keybind key="W-f"><action name="Execute" command="lxqt-qdbus run featherpad" /></keybind><!-- Ausführen-Dialog --><keybind key="A-F2"><action name="Execute" command="lxqt-runner" /></keybind><!-- Screenshot --><keybind key="Print"><action name="Execute" command="lxqt-qdbus run screengrab" /></keybind><!-- Bildschirm sperren --><keybind key="W-l"><action name="Execute" command="lxqt-leave --lockscreen" /></keybind><!-- QTerminal Dropdown --><keybind key="F12"><action name="Execute" command="qterminal -d" /></keybind><!-- Power-Buttons --><keybind key="XF86PowerOff"><action name="Execute" command="lxqt-leave" /></keybind><keybind key="XF86Suspend"><action name="Execute" command="lxqt-leave --suspend" /></keybind><keybind key="XF86Sleep"><action name="Execute" command="lxqt-leave --hibernate" /></keybind><!-- Desktop anzeigen/verstecken --><keybind key="W-D"><action name="Execute" command="lxqt-qdbus showdesktop" /></keybind><!-- Startmenü (LXQt-Menü) --><keybind key="A-F1"><action name="Execute" command="lxqt-qdbus openmenu" /></keybind><!-- Fenster wechseln --><keybind key="A-Tab"><action name="NextWindow" /></keybind><keybind key="A-S-Tab"><action name="PreviousWindow" /></keybind><!-- Fenster schließen --><keybind key="A-F4"><action name="Close" /></keybind><!-- Fenster maximieren --><keybind key="W-a"><action name="ToggleMaximize" /></keybind><!-- Fenster an Kanten andocken (Snap) --><keybind key="W-Left"><action name="SnapToEdge" direction="left" combine="yes" /></keybind><keybind key="W-Right"><action name="SnapToEdge" direction="right" combine="yes" /></keybind><keybind key="W-Up"><action name="SnapToEdge" direction="up" combine="yes" /></keybind><keybind key="W-Down"><action name="SnapToEdge" direction="down" combine="yes" /></keybind><!-- Fenster-Menü --><keybind key="A-Space"><action name="ShowMenu" menu="client-menu" atCursor="no" /></keybind><!-- LAUTSTÄRKE (LXQt-Befehle) --><keybind key="XF86_AudioLowerVolume"><action name="Execute" command="lxqt-qdbus volume down" /></keybind><keybind key="XF86_AudioRaiseVolume"><action name="Execute" command="lxqt-qdbus volume up" /></keybind><keybind key="XF86_AudioMute"><action name="Execute" command="lxqt-qdbus volume mute" /></keybind><!-- HELLIGKEIT (LXQt-Befehle) --><keybind key="XF86_MonBrightnessUp"><action name="Execute" command="lxqt-config-brightness -i" /></keybind><keybind key="XF86_MonBrightnessDown"><action name="Execute" command="lxqt-config-brightness -d" /></keybind><!-- HELLIGKEIT mit brightnessctl --><keybind key="XF86_MonBrightnessUp"><action name="Execute" command="brightnessctl -e set 5%+" /></keybind><keybind key="XF86_MonBrightnessDown"><action name="Execute" command="brightnessctl -e set 5%-" /></keybind>#
 
 </keyboard>
-
   <!--
     Multiple <mousebind> can exist within one <context>
     Multiple <actions> can exist within one <mousebind>
 
-    Use <mouse><default /> to load all the default mousebinds (those listed
+    Use <mouse><default     /> to load all the default mousebinds (those listed
     below). If the default mousebinds are largely what you want, a sensible
-    approach could be to start the <mouse> section with a <default />
+    approach could be to start the <mouse> section with a <default     />
     element, and then (re-)define any special binds you need such as launching
     a custom menu when right-clicking on your desktop. See rc.xml for an
     example.
   -->
   <mouse>
-
     <!-- time is in ms -->
     <doubleClickTime>500</doubleClickTime>
-
     <context name="Frame">
       <mousebind button="W-Left" action="Press">
         <action name="Focus" />
@@ -472,7 +248,6 @@
         <action name="Resize" />
       </mousebind>
     </context>
-
     <context name="Border">
       <mousebind button="Left" action="Press">
         <action name="Focus" />
@@ -482,7 +257,6 @@
         <action name="Resize" />
       </mousebind>
     </context>
-
     <context name="TitleBar">
       <mousebind button="Left" action="Press">
         <action name="Focus" />
@@ -501,7 +275,6 @@
         <action name="Shade" />
       </mousebind>
     </context>
-
     <context name="Title">
       <mousebind button="Left" action="Drag">
         <action name="Move" />
@@ -513,7 +286,6 @@
         <action name="ShowMenu" menu="client-menu" />
       </mousebind>
     </context>
-
     <context name="Maximize">
       <mousebind button="Left" action="Click">
         <action name="ToggleMaximize" />
@@ -525,7 +297,6 @@
         <action name="ToggleMaximize" direction="vertical" />
       </mousebind>
     </context>
-
     <context name="WindowMenu">
       <mousebind button="Left" action="Click">
         <action name="ShowMenu" menu="client-menu" atCursor="no" />
@@ -534,7 +305,6 @@
         <action name="ShowMenu" menu="client-menu" atCursor="no" />
       </mousebind>
     </context>
-
     <context name="Icon">
       <mousebind button="Left" action="Click">
         <action name="ShowMenu" menu="client-menu" atCursor="no" />
@@ -543,31 +313,26 @@
         <action name="ShowMenu" menu="client-menu" atCursor="no" />
       </mousebind>
     </context>
-
     <context name="Shade">
       <mousebind button="Left" action="Click">
         <action name="ToggleShade" />
       </mousebind>
     </context>
-
     <context name="AllDesktops">
       <mousebind button="Left" action="Click">
         <action name="ToggleOmnipresent" />
       </mousebind>
     </context>
-
     <context name="Iconify">
       <mousebind button="Left" action="Click">
         <action name="Iconify" />
       </mousebind>
     </context>
-
     <context name="Close">
       <mousebind button="Left" action="Click">
         <action name="Close" />
       </mousebind>
     </context>
-
     <context name="Client">
       <mousebind button="Left" action="Press">
         <action name="Focus" />
@@ -582,7 +347,6 @@
         <action name="Raise" />
       </mousebind>
     </context>
-
     <context name="Root">
       <mousebind button="Left" action="Press">
         <action name="ShowMenu" menu="root-menu" />
@@ -593,7 +357,7 @@
       <mousebind button="Middle" action="Press">
         <action name="ShowMenu" menu="root-menu" />
         <!-- openbox default, swap with above line to activate -->
-        <!-- <action name="ShowMenu" menu="client-list-combined-menu" /> -->
+        <!-- <action name="ShowMenu" menu="client-list-combined-menu"     /> -->
       </mousebind>
       <mousebind direction="Up" action="Scroll">
         <action name="GoToDesktop" to="left" wrap="yes" />
@@ -602,9 +366,7 @@
         <action name="GoToDesktop" to="right" wrap="yes" />
       </mousebind>
     </context>
-
   </mouse>
-
   <!--
     A touch configuration can be bound to a specific device. If device
     name is left empty, the touch configuration applies to all touch
@@ -622,7 +384,6 @@
     <!-- <mapToOutput>HDMI-A-1</mapToOutput> -->
     <mouseEmulation>no</mouseEmulation>
   </touch>
-
   <!--
     The tablet cursor movement can be restricted to a single output.
     If output is left empty or the output does not exists, the tablet
@@ -656,7 +417,6 @@
     <map button="Stylus" to="Right" />
     <map button="Stylus2" to="Middle" />
   </tablet>
-
   <!--
     All tablet tools, except of type mouse and lens, use absolute
     positioning by default. The *motion* attribute allows to set tools
@@ -667,8 +427,7 @@
     The pressure range of a tablet tool can be controlled by adjusting
     *minPressure* and *maxPressure*.
   -->
-  <tabletTool motion="absolute" relativeMotionSensitivity="1.0"
-              minPressure="0.0" maxPressure="1.0" />
+  <tabletTool motion="absolute" relativeMotionSensitivity="1.0" minPressure="0.0" maxPressure="1.0" />
   <!--
     The *category* attribute is optional and can be set to touch, touchpad,
     non-touch, default or the name of a device. You can obtain device names by
@@ -693,12 +452,13 @@
 
   -->
   <libinput>
-  <device category="touchpad">
-    <naturalScroll>yes</naturalScroll>
-  </device>
+    <device category="touchpad">
+      <naturalScroll>yes</naturalScroll>
+      <tapButtonMap>lmr</tapButtonMap>
+    </device>
     <device category="default">
       <!-- <naturalScroll>no</naturalScroll> -->
-      <leftHanded>yes</leftHanded> 
+      <leftHanded>no</leftHanded>
       <!-- <pointerSpeed>0.0</pointerSpeed> -->
       <!-- <accelProfile>adaptive</accelProfile> -->
       <tap>yes</tap>
@@ -716,7 +476,6 @@
       <scrollFactor>1.0</scrollFactor>
     </device>
   </libinput>
-
   <!--
     # Window Rules
     #   - Criteria can consist of 'identifier', 'title', 'sandboxEngine' or
@@ -731,10 +490,10 @@
     #     string and '?' matches any single character.
 
     <windowRules>
-      <windowRule identifier="*"><action name="Maximize"/></windowRule>
-      <windowRule identifier="foo" serverDecoration="yes"/>
-      <windowRule title="bar" serverDecoration="yes"/>
-      <windowRule identifier="baz" title="quax" serverDecoration="yes"/>
+      <windowRule identifier="*"><action name="Maximize"    /></windowRule>
+      <windowRule identifier="foo" serverDecoration="yes"    />
+      <windowRule title="bar" serverDecoration="yes"    />
+      <windowRule identifier="baz" title="quax" serverDecoration="yes"    />
     </windowRules>
 
     # Example below for `lxqt-panel` and `pcmanfm-qt \-\-desktop`
@@ -744,28 +503,26 @@
     <windowRules>
       <windowRule identifier="lxqt-panel" matchOnce="true">
         <skipTaskbar>yes</skipTaskbar>
-        <action name="MoveTo" x="0" y="0" />
-        <action name="ToggleAlwaysOnTop"/>
+        <action name="MoveTo" x="0" y="0"     />
+        <action name="ToggleAlwaysOnTop"    />
       </windowRule>
       <windowRule title="pcmanfm-desktop*">
         <skipTaskbar>yes</skipTaskbar>
         <skipWindowSwitcher>yes</skipWindowSwitcher>
         <fixedPosition>yes</fixedPosition>
-        <action name="MoveTo" x="0" y="0" />
-        <action name="ToggleAlwaysOnBottom"/>
+        <action name="MoveTo" x="0" y="0"     />
+        <action name="ToggleAlwaysOnBottom"    />
       </windowRule>
       <windowRule identifier="org.qutebrowser.qutebrowser">
-        <action name="ResizeTo" width="1024" height="800" />
-        <action name="AutoPlace"/>
+        <action name="ResizeTo" width="1024" height="800"     />
+        <action name="AutoPlace"    />
       </windowRule>
     </windowRules>
   -->
-
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>
   </menu>
-
   <!--
     Magnifier settings
     'width' sets the width in pixels of the magnifier window.
@@ -779,9 +536,8 @@
   <magnifier>
     <width>400</width>
     <height>400</height>
-    <initScale>2.0</initScale>
+    <initScale>2,1</initScale>
     <increment>0.2</increment>
     <useFilter>yes</useFilter>
   </magnifier>
-
 </labwc_config>
